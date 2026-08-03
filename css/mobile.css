@@ -1,0 +1,29 @@
+@media (max-width:480px){
+  .orb{
+    width:110px;
+    height:110px;
+  }
+
+  .title{
+    font-size:28px;
+  }
+
+  .subtitle{
+    font-size:15px;
+  }
+}
+@keyframes cardReveal{
+  from{
+    opacity:0;
+    transform:translateY(30px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.card-show{
+  display:flex !important;
+  animation:cardReveal .8s ease forwards;
+}
