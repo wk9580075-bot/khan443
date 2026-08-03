@@ -86,154 +86,51 @@ body{
 
 /* Teddy bears */
 
+/* Teddy bears - touch block fix */
 .teddy{
   position:fixed;
   width:95px;
-  z-index:2;
-  opacity:.95;
+  z-index:1;
+  pointer-events:none;   /* IMPORTANT */
+  user-select:none;
+  -webkit-user-select:none;
   filter:drop-shadow(0 16px 28px rgba(255,120,170,.18));
   animation:teddyFloat 6s ease-in-out infinite;
 }
 
-.teddy-top-left{
-  top:16px;
-  left:12px;
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;   /* IMPORTANT */
 }
 
-.teddy-top-right{
-  top:16px;
-  right:12px;
+/* Login page */
+#loginPage{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
-
-.teddy-bottom-left{
-  bottom:16px;
-  left:12px;
-}
-
-.teddy-bottom-right{
-  bottom:16px;
-  right:12px;
-}
-
-.teddy-center{
-  width:120px;
-  top:14%;
-  left:50%;
-  transform:translateX(-50%);
-  animation:teddyCenter 5s ease-in-out infinite;
-}
-
-@keyframes teddyFloat{
-  0%,100%{
-    transform:translateY(0) rotate(-2deg);
-  }
-  50%{
-    transform:translateY(-10px) rotate(2deg);
-  }
-}
-
-@keyframes teddyCenter{
-  0%,100%{
-    transform:translateX(-50%) translateY(0) scale(1);
-  }
-  50%{
-    transform:translateX(-50%) translateY(-14px) scale(1.04);
-  }
-}
-
-/* Login card */
 
 .login-card{
-  width:100%;
-  max-width:360px;
-  background:rgba(255,255,255,.34);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,.6);
-  border-radius:30px;
-  padding:28px;
-  box-shadow:
-    0 28px 60px rgba(255,120,170,.18),
-    inset 0 1px 0 rgba(255,255,255,.5);
   position:relative;
-}
-
-.login-card::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:32px;
-  background:linear-gradient(135deg,
-    rgba(255,255,255,.9),
-    rgba(255,255,255,.15),
-    rgba(255,255,255,.7));
-  z-index:-1;
-  filter:blur(10px);
-}
-
-.login-card h1{
-  text-align:center;
-  color:#7a2450;
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.love-line{
-  text-align:center;
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.subtitle{
-  text-align:center;
-  color:#9a5a79;
-  font-size:14px;
-  margin-bottom:22px;
-}
-
-.input-group{
-  margin-bottom:16px;
-}
-
-.input-group label{
-  display:block;
-  color:#8a4c6a;
-  font-size:14px;
-  margin-bottom:8px;
-}
-
-.input-group input{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:18px;
-  background:rgba(255,255,255,.82);
-  color:#7a2450;
-  font-size:16px;
-  outline:none;
-}
-
-.input-group input::placeholder{
-  color:#c06c98;
+  z-index:20;
 }
 
 .primary-btn{
   width:100%;
+  padding:16px;
   border:none;
   border-radius:18px;
-  padding:16px;
   background:linear-gradient(135deg,#ff78ad,#c86bff);
-  color:white;
-  font-size:16px;
+  color:#fff;
+  font-size:17px;
   font-weight:600;
-  box-shadow:0 18px 35px rgba(255,105,170,.3);
-}
-
-.login-error{
-  margin-top:14px;
-  text-align:center;
-  color:#d23b73;
-  font-size:14px;
+  cursor:pointer;
+  pointer-events:auto;
 }
 /* =========================
    LOVE LETTER PAGE

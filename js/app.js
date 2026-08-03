@@ -32,45 +32,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
-  function checkLogin() {
+  // Login button
+if (loginBtn) {
+  loginBtn.addEventListener('pointerup', function (e) {
+    e.preventDefault();
+    checkLogin();
+  });
+}
 
-    const id = loginId.value.trim().toLowerCase();
-    const pass = loginPass.value.trim().toLowerCase();
-
-    if (id === 'chintu' && pass === 'i love you') {
-
-      loginError.textContent = '';
-
-      if (navigator.vibrate) {
-        navigator.vibrate([20, 30, 20]);
-      }
-
-      openLetterPage();
-
-    } else {
-
-      loginError.textContent = 'Wrong ID or Password 💔';
-
-      if (navigator.vibrate) {
-        navigator.vibrate(120);
-      }
-
+// Enter key
+if (loginPass) {
+  loginPass.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      checkLogin();
     }
+  });
+}
 
-  }
+// Continue button
+if (continueBtn) {
+  continueBtn.addEventListener('pointerup', function (e) {
+    e.preventDefault();
 
-  if (loginBtn) {
-    loginBtn.addEventListener('click', checkLogin);
-  }
+    letterPage.classList.remove('active');
 
-  if (loginPass) {
-    loginPass.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        checkLogin();
-      }
-    });
-  }
+    loginId.value = '';
+    loginPass.value = '';
+    loginError.textContent = '';
 
+    setTimeout(() => {
+      loginPage.classList.add('active');
+    }, 300);
+  });
+}
   if (continueBtn) {
     continueBtn.addEventListener('click', function () {
 
