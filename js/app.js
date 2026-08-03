@@ -1,121 +1,92 @@
 document.addEventListener('DOMContentLoaded', function () {
-const bgMusic = document.getElementById('bgMusic');
 
-// Browser autoplay block ko handle karega
-function startMusic() {
-  const bgMusic = document.getElementById('bgMusic');
-
-  if (!bgMusic) {
-    console.log('Audio element not found');
-    return;
-  }
-
-  bgMusic.volume = 0.6;
-
-  bgMusic.play().then(() => {
-    console.log('Music started');
-  }).catch((err) => {
-    console.log('Play failed:', err);
-  });
-}
-
-// Login successful hone par music start
   const loginPage = document.getElementById('loginPage');
   const letterPage = document.getElementById('letterPage');
 
   const loginBtn = document.getElementById('loginBtn');
+  const continueBtn = document.getElementById('continueBtn');
+
   const loginId = document.getElementById('loginId');
   const loginPass = document.getElementById('loginPass');
   const loginError = document.getElementById('loginError');
 
+  const bgMusic = document.getElementById('bgMusic');
+
+  function startMusic() {
+    if (!bgMusic) return;
+
+    bgMusic.volume = 0.5;
+
+    bgMusic.play().catch(() => {});
+  }
+
   function openLetterPage() {
+
+    startMusic();
+
     loginPage.classList.remove('active');
 
-    setTimeout(function () {
+    setTimeout(() => {
       letterPage.classList.add('active');
     }, 300);
+
   }
-function checkLogin() {
 
-  const id = loginId.value.trim().toLowerCase();
-  const pass = loginPass.value.trim().toLowerCase();
+  function checkLogin() {
 
-  const validId = 'chintu';
-  const validPass = 'i love you';
+    const id = loginId.value.trim().toLowerCase();
+    const pass = loginPass.value.trim().toLowerCase();
 
-  if (id === validId && pass === validPass) {
+    if (id === 'chintu' && pass === 'i love you') {
 
-    loginError.textContent = '';
+      loginError.textContent = '';
 
-    if (navigator.vibrate) {
-      navigator.vibrate([20, 30, 20]);
-    }
-function openLetterPage() {
-  startMusic();
-
-  loginPage.classList.remove('active');
-
-  setTimeout(() => {
-    letterPage.classList.add('active');
-  }, 300);
-}
-    // Open next page
-    openLetterPage();
-
-  } else {
-
-    loginError.textContent = 'Wrong ID or Password 💔';
-
-    loginError.animate(
-      [
-        { transform: 'translateX(0px)' },
-        { transform: 'translateX(-6px)' },
-        { transform: 'translateX(6px)' },
-        { transform: 'translateX(0px)' }
-      ],
-      {
-        duration: 300
+      if (navigator.vibrate) {
+        navigator.vibrate([20, 30, 20]);
       }
-    );
 
-    if (navigator.vibrate) {
-      navigator.vibrate(120);
+      openLetterPage();
+
+    } else {
+
+      loginError.textContent = 'Wrong ID or Password 💔';
+
+      if (navigator.vibrate) {
+        navigator.vibrate(120);
+      }
+
     }
 
   }
 
-}
-
-  // Open button
-  continueBtn.addEventListener('click', function () {
-
-  if (navigator.vibrate) {
-    navigator.vibrate([20,40,20]);
+  if (loginBtn) {
+    loginBtn.addEventListener('click', checkLogin);
   }
 
-  // Letter page hide
-  letterPage.classList.remove('active');
+  if (loginPass) {
+    loginPass.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        checkLogin();
+      }
+    });
+  }
 
-  // Reset login fields
-  loginId.value = '';
-  loginPass.value = '';
-  loginError.textContent = '';
+  if (continueBtn) {
+    continueBtn.addEventListener('click', function () {
 
-  // Login page show
-  setTimeout(function () {
-    loginPage.classList.add('active');
-  }, 400);
+      letterPage.classList.remove('active');
 
-});
+      loginId.value = '';
+      loginPass.value = '';
+      loginError.textContent = '';
 
-  // Enter key
-  loginPass.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      checkLogin();
-    }
-  });
+      setTimeout(() => {
+        loginPage.classList.add('active');
+      }, 300);
 
-  // Floating love words
+    });
+  }
+
   const words = [
     'Love ❤️',
     'I Love You 💕',
@@ -129,15 +100,14 @@ function openLetterPage() {
 
     const word = document.createElement('div');
     word.className = 'love-word';
-    word.textContent =
-      words[Math.floor(Math.random() * words.length)];
+    word.textContent = words[Math.floor(Math.random() * words.length)];
 
     word.style.left = x + 'px';
     word.style.top = y + 'px';
 
     document.body.appendChild(word);
 
-    setTimeout(function () {
+    setTimeout(() => {
       word.remove();
     }, 1800);
 
